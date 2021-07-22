@@ -45,8 +45,30 @@
             cantidad: 1
         }
 
-        //Agergar elementos al arreglo del carrito
-        articuloCarrito = [ ...articuloCarrito, infoCurso ];
+        //REvisa si un elementoya existe en el carrito
+        const existe = articuloCarrito.some( curso => curso.id === infoCurso.id );
+        if(existe){
+            //Actualizamos la cantidad
+            const cursos = articuloCarrito.map( curso => {
+
+                if(curso.id === infoCurso.id ){
+                    curso.cantidad ++;
+                    return curso;   //Retorna el objeto actualizado
+                }
+                else{
+                    return curso; //Retorna los objetos que no son los duplicados
+                }
+
+            })
+
+            articuloCarrito = [ ...cursos ];
+
+        } else {
+            //Agergar elementos al arreglo del carrito
+            articuloCarrito = [ ...articuloCarrito, infoCurso ];
+        }
+        //console.log(existe);
+
 
         console.log(articuloCarrito);
         carritoHTML();
@@ -66,7 +88,7 @@
 
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td>
+                <td> 
                     <img src='${imagen}' width="100" >
                 </td>
                 <td>${titulo}</td>
