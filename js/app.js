@@ -38,7 +38,7 @@
 
         //Crea un objeto con el contenido actual
         const infoCurso = {
-            imagen: curso.querySelector('img').src,
+            imagen: curso.querySelector("img").src,
             titulo: curso.querySelector('h4').textContent,
             precio: curso.querySelector('.precio span').textContent,
             id: curso.querySelector('a').getAttribute('data-id'),
@@ -60,10 +60,20 @@
 
         //Recorrer el carrito y generar el HTML
         articuloCarrito.forEach( curso => {
+            
+            //podemos utilizar Destructuring
+            const { imagen, titulo, precio, cantidad } = curso;
+
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>
-                    ${curso.titulo}
+                    <img src='${imagen}' width="100" >
+                </td>
+                <td>${titulo}</td>
+                <td>${precio}</td>
+                <td>${cantidad}</td>
+                <td>
+                    <a href="#" class="borrar-curso" data-id="{id}"> X </a>
                 </td>
             `;
             contenedorCarrito.appendChild(row);
