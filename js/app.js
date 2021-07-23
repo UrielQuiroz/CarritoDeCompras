@@ -96,7 +96,7 @@
         //console.log(existe);
 
 
-        console.log(articuloCarrito);
+        //console.log(articuloCarrito);
         carritoHTML();
     }
 
