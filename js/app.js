@@ -21,6 +21,12 @@
         //Elimina cursos del carrito
         carrito.addEventListener('click', eliminarCurso);
 
+        //Muestra los cursos de LocalStorage
+        document.addEventListener('DOMContentLoaded', () => {
+            articuloCarrito = JSON.parse( localStorage.getItem('carrito')) || [];
+            carritoHTML();
+       })
+
         //Vaciar Carrito
         btnVaciarCarrito.addEventListener('click', () => {
             articuloCarrito = []; //Reseteamos el arreglo
@@ -126,13 +132,20 @@
             `;
             contenedorCarrito.appendChild(row);
         })
+
+        sincronizarStorage();
     }
 
+
+    function sincronizarStorage() {
+        localStorage.setItem('carrito', JSON.stringify(articuloCarrito));
+    }
 
     function LimpiarHTML() {
         //Forma lenta
         //contenedorCarrito.innerHTML = '';
 
+        //Forma rapida
         while(contenedorCarrito.firstChild){
             contenedorCarrito.removeChild(contenedorCarrito.firstChild);
         }
